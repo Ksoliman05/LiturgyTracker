@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>St. Mina Holmdel - Sunday Schedule</title>
+<title>St. Mina Holmdel — Sunday Schedule</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -174,34 +174,34 @@
       <button class="btn admin-btn" onclick="verifyAdmin()">Unlock</button>
       <button class="btn" onclick="closeAdminLogin()">Cancel</button>
     </div>
-    <div class="admin-error" id="admin-error">Incorrect PIN - try again</div>
+    <div class="admin-error" id="admin-error">Incorrect PIN — try again</div>
   </div>
 
   <div class="override-active-banner" id="override-banner">
     <span>&#9632; Manual override is active for this Sunday</span>
-    <button class="btn danger-btn" onclick="clearOverride()">Clear override</button>
+    <button class="btn danger-btn" onclick="showAdminLoginForClear()">Clear override</button>
   </div>
 
   <div class="admin-panel" id="admin-panel">
     <div class="admin-panel-header">
-      <div class="admin-panel-title">&#9632; Manual override - this Sunday</div>
+      <div class="admin-panel-title">&#9632; Manual override — this Sunday</div>
       <div class="admin-panel-note">Absence toggles disabled while override is active</div>
     </div>
     <div class="override-grid">
       <div class="override-field">
-        <label>1st Liturgy - Celebrant</label>
+        <label>1st Liturgy — Celebrant</label>
         <input type="text" id="ov-first" placeholder="e.g. Fr. Abraam">
       </div>
       <div class="override-field">
-        <label>2nd Liturgy - Celebrant</label>
+        <label>2nd Liturgy — Celebrant</label>
         <input type="text" id="ov-second" placeholder="e.g. Fr. Abraham">
       </div>
       <div class="override-field">
-        <label>3rd Liturgy - Celebrant</label>
+        <label>3rd Liturgy — Celebrant</label>
         <input type="text" id="ov-thirdc" placeholder="e.g. Fr. Mina">
       </div>
       <div class="override-field">
-        <label>3rd Liturgy - Assistant</label>
+        <label>3rd Liturgy — Assistant</label>
         <input type="text" id="ov-thirda" placeholder="e.g. Fr. Anastasi">
       </div>
     </div>
@@ -283,7 +283,7 @@
       third_celebrant: values.thirdC,
       third_assistant: values.thirdA
     };
-    // Upsert - insert or update if exists
+    // Upsert — insert or update if exists
     const res = await fetch(
       `${SUPABASE_URL}/rest/v1/override`,
       {
@@ -356,7 +356,7 @@
 
     if (role === 'thirdA') {
       s.thirdA = 'visitor';
-      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent as 3rd Assistant - a visiting priest fills that slot. <em>Confirm with clergy.</em>`;
+      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent as 3rd Assistant — a visiting priest fills that slot. <em>Confirm with clergy.</em>`;
     } else {
       // 3rd assistant covers the missing role
       const coveringPriest = PRIESTS[s.thirdA];
@@ -364,7 +364,7 @@
       else if (role === 'second') s.second = s.thirdA;
       else if (role === 'thirdC') s.thirdC = s.thirdA;
       s.thirdA = 'visitor';
-      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent - <strong>${coveringPriest}</strong> covers their role, visiting priest assists at 3rd. <em>Confirm with clergy.</em>`;
+      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent — <strong>${coveringPriest}</strong> covers their role, visiting priest assists at 3rd. <em>Confirm with clergy.</em>`;
     }
 
     return { slot: s, edgeMsg };
@@ -377,6 +377,8 @@
     return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
   }
 
+  let pendingClear = false;
+
   async function verifyAdmin() {
     const input = document.getElementById('admin-pw').value;
     const hashed = await sha256(input);
@@ -385,22 +387,34 @@
       document.getElementById('admin-login').classList.remove('visible');
       document.getElementById('admin-pw').value = '';
       document.getElementById('admin-error').classList.remove('visible');
-      document.getElementById('admin-panel').classList.add('visible');
       document.getElementById('admin-trigger').style.display = 'none';
-      // Pre-fill fields
-      const sundays = getSundays();
-      const ci = getCycleIndex(sundays[0]);
-      const slot = CYCLE[ci];
-      document.getElementById('ov-first').value = override ? override.first : PRIESTS[slot.first];
-      document.getElementById('ov-second').value = override ? override.second : PRIESTS[slot.second];
-      document.getElementById('ov-thirdc').value = override ? override.thirdC : PRIESTS[slot.thirdC];
-      document.getElementById('ov-thirda').value = override ? override.thirdA : PRIESTS[slot.thirdA];
+      if (pendingClear) {
+        pendingClear = false;
+        clearOverride();
+      } else {
+        document.getElementById('admin-panel').classList.add('visible');
+        // Pre-fill fields
+        const sundays = getSundays();
+        const ci = getCycleIndex(sundays[0]);
+        const slot = CYCLE[ci];
+        document.getElementById('ov-first').value = override ? override.first : PRIESTS[slot.first];
+        document.getElementById('ov-second').value = override ? override.second : PRIESTS[slot.second];
+        document.getElementById('ov-thirdc').value = override ? override.thirdC : PRIESTS[slot.thirdC];
+        document.getElementById('ov-thirda').value = override ? override.thirdA : PRIESTS[slot.thirdA];
+      }
     } else {
       document.getElementById('admin-error').classList.add('visible');
     }
   }
 
   function showAdminLogin() {
+    pendingClear = false;
+    document.getElementById('admin-login').classList.add('visible');
+    setTimeout(() => document.getElementById('admin-pw').focus(), 50);
+  }
+
+  function showAdminLoginForClear() {
+    pendingClear = true;
     document.getElementById('admin-login').classList.add('visible');
     setTimeout(() => document.getElementById('admin-pw').focus(), 50);
   }
@@ -434,7 +448,7 @@
       setStatus('');
       render();
     } else {
-      setStatus('Failed to save - check your connection.');
+      setStatus('Failed to save — check your connection.');
     }
   }
 
@@ -529,7 +543,7 @@
     PRIESTS.forEach((p, i) => {
       const btn = document.createElement('button');
       btn.className = 'priest-btn' + (absentSet.has(i) ? ' absent' : '');
-      btn.textContent = absentSet.has(i) ? p + ' - absent' : p;
+      btn.textContent = absentSet.has(i) ? p + ' — absent' : p;
       btn.onclick = () => {
         if (absentSet.has(i)) absentSet.delete(i); else { absentSet.clear(); absentSet.add(i); }
         render();
