@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>St. Mina Holmdel — Sunday Schedule</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #B8965A;
+    --gold-light: #D4B483;
+    --gold-pale: #F5EDD8;
+    --deep: #1A1208;
+    --ink: #2C2418;
+    --muted: #7A6E60;
+    --border: #E2D5BC;
+    --bg: #FAF7F2;
+    --card: #FFFFFF;
+    --danger: #8B2020;
+    --danger-bg: #FDF0F0;
+    --success: #2A5C3F;
+    --warning: #7A5C10;
+    --warning-bg: #FDF8EE;
+    --warning-border: #E8D5A0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cross {
+    font-size: 22px;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+
+  .church-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--deep);
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 0.4rem;
+  }
+
+  .ornament {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+    justify-content: center;
+  }
+
+  .ornament-line {
+    height: 1px;
+    width: 60px;
+    background: linear-gradient(to right, transparent, var(--gold-light));
+  }
+
+  .ornament-line.right {
+    background: linear-gradient(to left, transparent, var(--gold-light));
+  }
+
+  .ornament-diamond {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    transform: rotate(45deg);
+  }
+
+  /* Controls row */
+  .controls {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .control-label {
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  input[type="date"] {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 12px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+
+  input[type="date"]:focus {
+    border-color: var(--gold);
+  }
+
+  .btn {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 400;
+    padding: 7px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .btn.primary {
+    background: var(--gold-pale);
+    border-color: var(--gold);
+    color: var(--deep);
+  }
+
+  .btn.primary:hover {
+    background: var(--gold);
+    color: #fff;
+  }
+
+  /* Absent section */
+  .absent-section {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .absent-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+
+  .absent-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .absent-note {
+    font-size: 0.68rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .absent-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .priest-btn {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 400;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    letter-spacing: 0.02em;
+  }
+
+  .priest-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .priest-btn.absent { background: var(--danger-bg); color: var(--danger); border-color: #E8BBBB; }
+
+  /* Warning banner for edge case */
+  .edge-banner {
+    background: var(--warning-bg);
+    border: 1px solid var(--warning-border);
+    border-radius: 8px;
+    padding: 0.65rem 1rem;
+    margin-bottom: 2rem;
+    font-size: 0.78rem;
+    color: var(--warning);
+    line-height: 1.5;
+    display: none;
+  }
+
+  .edge-banner.visible { display: block; }
+
+  .edge-banner strong { font-weight: 500; }
+
+  /* Week cards */
+  .weeks { display: flex; flex-direction: column; gap: 1.25rem; }
+
+  .week-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .week-card.current {
+    border-color: var(--gold);
+    box-shadow: 0 2px 16px rgba(184,150,90,0.12);
+  }
+
+  .week-header {
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    background: #FDFBF7;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .week-card.current .week-header { background: var(--gold-pale); }
+
+  .week-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--deep);
+  }
+
+  .current-badge {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(184,150,90,0.1);
+    border: 1px solid rgba(184,150,90,0.3);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .lookup-badge {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: #F5F2EC;
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .liturgies {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .liturgy {
+    padding: 1.1rem 1.25rem;
+    border-right: 1px solid var(--border);
+  }
+
+  .liturgy:last-child { border-right: none; }
+
+  .liturgy-title {
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .priest-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--deep);
+    line-height: 1.3;
+  }
+
+  .priest-name.tbd { color: var(--danger); font-style: italic; }
+  .priest-name.visitor { color: var(--muted); font-style: italic; }
+
+  .role-label {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--muted);
+    margin-top: 1px;
+    letter-spacing: 0.04em;
+  }
+
+  .role-label.celebrant { color: var(--success); }
+
+  .tbd-note {
+    font-size: 0.65rem;
+    color: var(--danger);
+    margin-top: 4px;
+    line-height: 1.4;
+    font-style: italic;
+  }
+
+  .third-pair { display: flex; flex-direction: column; gap: 0.7rem; }
+  .third-pair .divider { height: 1px; background: var(--border); }
+
+  .viewing-label {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+    font-style: italic;
+    text-align: center;
+  }
+
+  @media (max-width: 560px) {
+    .liturgies { grid-template-columns: 1fr; }
+    .liturgy { border-right: none; border-bottom: 1px solid var(--border); }
+    .liturgy:last-child { border-bottom: none; }
+    .church-name { font-size: 1.7rem; }
+    .controls { flex-direction: column; align-items: stretch; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="cross">✦ ✦ ✦</div>
+    <div class="church-name">St. Mina Holmdel</div>
+    <div class="subtitle">Sunday Liturgy Schedule</div>
+    <div class="ornament">
+      <div class="ornament-line"></div>
+      <div class="ornament-diamond"></div>
+      <div class="ornament-line right"></div>
+    </div>
+  </div>
+
+  <!-- Date controls -->
+  <div class="controls">
+    <div class="control-group">
+      <div class="control-label">Jump to date</div>
+      <input type="date" id="date-picker">
+    </div>
+    <button class="btn primary" onclick="lookupDate()">View schedule</button>
+    <button class="btn" onclick="resetToToday()">Back to today</button>
+  </div>
+
+  <!-- Absent toggles (only shown in today mode) -->
+  <div class="absent-section" id="absent-section">
+    <div class="absent-section-header">
+      <div class="absent-label">Mark as absent this Sunday</div>
+      <div class="absent-note">affects this Sunday only</div>
+    </div>
+    <div class="absent-buttons" id="absent-buttons"></div>
+  </div>
+
+  <!-- Edge case warning banner -->
+  <div class="edge-banner" id="edge-banner"></div>
+
+  <div id="viewing-label"></div>
+  <div class="weeks" id="weeks"></div>
+
+</div>
+
+<script>
+  const PRIESTS = ['Fr. Abraam', 'Fr. Abraham', 'Fr. Mina', 'Fr. Anastasi'];
+
+  // 4-week rotation: each entry = { first, second, thirdC, thirdA } as indices into PRIESTS
+  const CYCLE = [
+    { first: 0, second: 1, thirdC: 2, thirdA: 3 },
+    { first: 1, second: 2, thirdC: 3, thirdA: 0 },
+    { first: 2, second: 3, thirdC: 0, thirdA: 1 },
+    { first: 3, second: 0, thirdC: 1, thirdA: 2 },
+  ];
+
+  // Anchor: Feb 1 2025 = Week A (cycle index 0)
+  const ANCHOR = new Date(2025, 1, 1);
+
+  let absentSet = new Set();
+  let lookupMode = false; // false = rolling 3-week from today, true = single date lookup
+
+  function getNextSunday(from) {
+    const d = new Date(from);
+    d.setHours(0, 0, 0, 0);
+    const day = d.getDay();
+    const diff = day === 0 ? 0 : 7 - day;
+    d.setDate(d.getDate() + diff);
+    return d;
+  }
+
+  function getCycleIndex(date) {
+    const msPerWeek = 7 * 24 * 60 * 60 * 1000;
+    const anchorSunday = getNextSunday(ANCHOR);
+    const weeksDiff = Math.round((date - anchorSunday) / msPerWeek);
+    return ((weeksDiff % 4) + 4) % 4;
+  }
+
+  function formatDate(d) {
+    return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+  }
+
+  function getSundays() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const first = getNextSunday(today);
+    return [0, 1, 2].map(i => {
+      const d = new Date(first);
+      d.setDate(d.getDate() + i * 7);
+      return d;
+    });
+  }
+
+  // Apply edge case logic for the first (current) Sunday
+  // Returns a modified slot object based on who is absent
+  function applyEdgeCases(slot) {
+    if (absentSet.size === 0) return { slot, edgeMsg: null };
+
+    const absent = [...absentSet][0]; // handle one absence at a time for now
+    let s = { ...slot };
+    let edgeMsg = null;
+
+    // Determine the absent priest's role
+    const role =
+      s.first === absent ? 'first' :
+      s.second === absent ? 'second' :
+      s.thirdC === absent ? 'thirdC' :
+      s.thirdA === absent ? 'thirdA' : null;
+
+    if (!role) return { slot: s, edgeMsg: null };
+
+    if (role === 'thirdA') {
+      // Simplest case: assistant slot gets a visitor, no reshuffling
+      s.thirdA = 'visitor';
+      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent. As 3rd Assistant, their slot is covered by a visiting priest — no reshuffling needed. <em>Confirm with clergy.</em>`;
+    }
+
+    else if (role === 'thirdC') {
+      // 3rd Celebrant is out: assistant steps up, visitor fills assistant
+      s.thirdC = s.thirdA;
+      s.thirdA = 'visitor';
+      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent as 3rd Celebrant. The 3rd Assistant steps up to celebrate, and a visiting priest assists. <em>Confirm with clergy.</em>`;
+    }
+
+    else if (role === 'second') {
+      // 2nd is out: 3rd Celebrant moves to 2nd, 3rd Assistant steps up to celebrate, visitor assists
+      s.second = s.thirdC;
+      s.thirdC = s.thirdA;
+      s.thirdA = 'visitor';
+      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent as 2nd Liturgy celebrant. The rotation shifts down: 3rd Celebrant covers 2nd, 3rd Assistant steps up to celebrate, visiting priest assists. <em>Confirm with clergy.</em>`;
+    }
+
+    else if (role === 'first') {
+      // 1st is out: everyone shifts up, visitor fills 3rd assistant
+      s.first = s.second;
+      s.second = s.thirdC;
+      s.thirdC = s.thirdA;
+      s.thirdA = 'visitor';
+      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent as 1st Liturgy celebrant. Everyone shifts up one position, and a visiting priest assists at the 3rd Liturgy. <em>Confirm with clergy.</em>`;
+    }
+
+    return { slot: s, edgeMsg };
+  }
+
+  function priestBlock(idx, role, applyAbsent) {
+    if (idx === 'visitor') {
+      return `<div class="priest-name visitor">Visiting Priest</div>
+              <div class="role-label">${role}</div>`;
+    }
+    const roleClass = role === 'Celebrant' ? 'role-label celebrant' : 'role-label';
+    return `<div class="priest-name">${PRIESTS[idx]}</div>
+            <div class="${roleClass}">${role}</div>`;
+  }
+
+  function renderCard(sunday, isCurrent, isLookup) {
+    const ci = getCycleIndex(sunday);
+    let slot = { ...CYCLE[ci] };
+    let edgeMsg = null;
+
+    if (isCurrent && absentSet.size > 0) {
+      const result = applyEdgeCases(slot);
+      slot = result.slot;
+      edgeMsg = result.edgeMsg;
+    }
+
+    const badge = isCurrent
+      ? '<div class="current-badge">This Sunday</div>'
+      : isLookup
+        ? '<div class="lookup-badge">Looked up</div>'
+        : '';
+
+    return { html: `
+      <div class="week-card ${isCurrent ? 'current' : ''}">
+        <div class="week-header">
+          <div class="week-date">${formatDate(sunday)}</div>
+          ${badge}
+        </div>
+        <div class="liturgies">
+          <div class="liturgy">
+            <div class="liturgy-title">1st Liturgy</div>
+            ${priestBlock(slot.first, 'Celebrant', isCurrent)}
+          </div>
+          <div class="liturgy">
+            <div class="liturgy-title">2nd Liturgy</div>
+            ${priestBlock(slot.second, 'Celebrant', isCurrent)}
+          </div>
+          <div class="liturgy">
+            <div class="liturgy-title">3rd Liturgy</div>
+            <div class="third-pair">
+              <div>${priestBlock(slot.thirdC, 'Celebrant', isCurrent)}</div>
+              <div class="divider"></div>
+              <div>${priestBlock(slot.thirdA, 'Assistant', isCurrent)}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `, edgeMsg };
+  }
+
+  function renderAbsentButtons() {
+    const container = document.getElementById('absent-buttons');
+    container.innerHTML = '';
+    PRIESTS.forEach((p, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'priest-btn' + (absentSet.has(i) ? ' absent' : '');
+      btn.textContent = absentSet.has(i) ? p + ' — absent' : p;
+      btn.onclick = () => {
+        // Only allow one absent at a time for now
+        if (absentSet.has(i)) {
+          absentSet.delete(i);
+        } else {
+          absentSet.clear();
+          absentSet.add(i);
+        }
+        render();
+      };
+      container.appendChild(btn);
+    });
+  }
+
+  function lookupDate() {
+    const picker = document.getElementById('date-picker');
+    if (!picker.value) return;
+    const [y, m, d] = picker.value.split('-').map(Number);
+    const picked = new Date(y, m - 1, d);
+    const sunday = getNextSunday(picked);
+    lookupMode = sunday;
+    render();
+  }
+
+  function resetToToday() {
+    lookupMode = false;
+    absentSet.clear();
+    document.getElementById('date-picker').value = '';
+    render();
+  }
+
+  function render() {
+    renderAbsentButtons();
+
+    const absentSection = document.getElementById('absent-section');
+    const banner = document.getElementById('edge-banner');
+    const viewingLabel = document.getElementById('viewing-label');
+    const container = document.getElementById('weeks');
+    container.innerHTML = '';
+    banner.className = 'edge-banner';
+    banner.innerHTML = '';
+    viewingLabel.innerHTML = '';
+
+    if (lookupMode) {
+      // Single date lookup mode
+      absentSection.style.display = 'none';
+      const sunday = lookupMode;
+      viewingLabel.innerHTML = `<div class="viewing-label">Showing schedule for the Sunday of the selected week</div>`;
+      const { html } = renderCard(sunday, false, true);
+      container.innerHTML = html;
+    } else {
+      // Rolling 3-week mode
+      absentSection.style.display = 'block';
+      const sundays = getSundays();
+      let edgeMsgToShow = null;
+
+      sundays.forEach((sunday, wi) => {
+        const isCurrent = wi === 0;
+        const { html, edgeMsg } = renderCard(sunday, isCurrent, false);
+        if (isCurrent && edgeMsg) edgeMsgToShow = edgeMsg;
+        container.innerHTML += html;
+      });
+
+      if (edgeMsgToShow) {
+        banner.innerHTML = edgeMsgToShow;
+        banner.className = 'edge-banner visible';
+      }
+    }
+  }
+
+  render();
+</script>
+</body>
+</html>
