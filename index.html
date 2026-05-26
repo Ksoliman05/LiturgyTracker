@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>St. Mina Holmdel — Sunday Schedule</title>
+<title>St. Mina Holmdel - Sunday Schedule</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -22,340 +22,126 @@
     --warning: #7A5C10;
     --warning-bg: #FDF8EE;
     --warning-border: #E8D5A0;
+    --admin: #1A3A5C;
+    --admin-bg: #EEF4FA;
+    --admin-border: #B8D0E8;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: 'Jost', sans-serif; font-weight: 300; min-height: 100vh; }
+  .page { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
 
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'Jost', sans-serif;
-    font-weight: 300;
-    min-height: 100vh;
-  }
+  .header { text-align: center; margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+  .cross { font-size: 22px; color: var(--gold); margin-bottom: 0.75rem; letter-spacing: 0.1em; }
+  .church-name { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 600; color: var(--deep); letter-spacing: 0.02em; line-height: 1.2; }
+  .subtitle { font-size: 0.8rem; font-weight: 400; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 0.4rem; }
+  .ornament { display: flex; align-items: center; gap: 0.75rem; margin-top: 1.25rem; justify-content: center; }
+  .ornament-line { height: 1px; width: 60px; background: linear-gradient(to right, transparent, var(--gold-light)); }
+  .ornament-line.right { background: linear-gradient(to left, transparent, var(--gold-light)); }
+  .ornament-diamond { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); }
 
-  .page {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 3rem 1.5rem 4rem;
-  }
+  .controls { display: flex; gap: 0.75rem; margin-bottom: 1.25rem; align-items: flex-end; flex-wrap: wrap; }
+  .control-group { display: flex; flex-direction: column; gap: 0.35rem; }
+  .control-label { font-size: 0.68rem; font-weight: 500; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; }
 
-  .header {
-    text-align: center;
-    margin-bottom: 2.5rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--border);
+  input[type="date"], input[type="password"], input[type="text"] {
+    font-family: 'Jost', sans-serif; font-size: 0.85rem; font-weight: 400; color: var(--ink);
+    background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 7px 12px;
+    outline: none; cursor: pointer; transition: border-color 0.15s;
   }
-
-  .cross {
-    font-size: 22px;
-    color: var(--gold);
-    margin-bottom: 0.75rem;
-    letter-spacing: 0.1em;
-  }
-
-  .church-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem;
-    font-weight: 600;
-    color: var(--deep);
-    letter-spacing: 0.02em;
-    line-height: 1.2;
-  }
-
-  .subtitle {
-    font-size: 0.8rem;
-    font-weight: 400;
-    color: var(--muted);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-top: 0.4rem;
-  }
-
-  .ornament {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-top: 1.25rem;
-    justify-content: center;
-  }
-
-  .ornament-line {
-    height: 1px;
-    width: 60px;
-    background: linear-gradient(to right, transparent, var(--gold-light));
-  }
-
-  .ornament-line.right {
-    background: linear-gradient(to left, transparent, var(--gold-light));
-  }
-
-  .ornament-diamond {
-    width: 6px;
-    height: 6px;
-    background: var(--gold);
-    transform: rotate(45deg);
-  }
-
-  /* Controls row */
-  .controls {
-    display: flex;
-    gap: 0.75rem;
-    margin-bottom: 1.25rem;
-    align-items: flex-end;
-    flex-wrap: wrap;
-  }
-
-  .control-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-  }
-
-  .control-label {
-    font-size: 0.68rem;
-    font-weight: 500;
-    color: var(--muted);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  input[type="date"] {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 400;
-    color: var(--ink);
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 7px 12px;
-    outline: none;
-    cursor: pointer;
-    transition: border-color 0.15s;
-  }
-
-  input[type="date"]:focus {
-    border-color: var(--gold);
-  }
+  input[type="date"]:focus, input[type="password"]:focus, input[type="text"]:focus { border-color: var(--gold); }
 
   .btn {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 400;
-    padding: 7px 16px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: #fff;
-    color: var(--ink);
-    cursor: pointer;
-    transition: all 0.15s;
-    letter-spacing: 0.02em;
-    white-space: nowrap;
+    font-family: 'Jost', sans-serif; font-size: 0.82rem; font-weight: 400; padding: 7px 16px;
+    border-radius: 8px; border: 1px solid var(--border); background: #fff; color: var(--ink);
+    cursor: pointer; transition: all 0.15s; letter-spacing: 0.02em; white-space: nowrap;
   }
+  .btn:hover { border-color: var(--gold); color: var(--gold); }
+  .btn.primary { background: var(--gold-pale); border-color: var(--gold); color: var(--deep); }
+  .btn.primary:hover { background: var(--gold); color: #fff; }
+  .btn.admin-btn { border-color: var(--admin-border); color: var(--admin); background: var(--admin-bg); }
+  .btn.admin-btn:hover { background: var(--admin); color: #fff; border-color: var(--admin); }
+  .btn.danger-btn { border-color: #E8BBBB; color: var(--danger); background: var(--danger-bg); }
+  .btn.danger-btn:hover { background: var(--danger); color: #fff; }
 
-  .btn:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-  }
-
-  .btn.primary {
-    background: var(--gold-pale);
-    border-color: var(--gold);
-    color: var(--deep);
-  }
-
-  .btn.primary:hover {
-    background: var(--gold);
-    color: #fff;
-  }
-
-  /* Absent section */
-  .absent-section {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
-    margin-bottom: 2rem;
-  }
-
-  .absent-section-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0.75rem;
-  }
-
-  .absent-label {
-    font-size: 0.7rem;
-    font-weight: 500;
-    color: var(--muted);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  .absent-note {
-    font-size: 0.68rem;
-    color: var(--muted);
-    font-style: italic;
-  }
-
-  .absent-buttons {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
-
-  .priest-btn {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 400;
-    padding: 5px 14px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-    background: var(--bg);
-    color: var(--ink);
-    cursor: pointer;
-    transition: all 0.15s ease;
-    letter-spacing: 0.02em;
-  }
-
+  .absent-section { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; }
+  .absent-section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+  .absent-label { font-size: 0.7rem; font-weight: 500; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; }
+  .absent-note { font-size: 0.68rem; color: var(--muted); font-style: italic; }
+  .absent-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .priest-btn { font-family: 'Jost', sans-serif; font-size: 0.82rem; font-weight: 400; padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--bg); color: var(--ink); cursor: pointer; transition: all 0.15s ease; }
   .priest-btn:hover { border-color: var(--gold); color: var(--gold); }
   .priest-btn.absent { background: var(--danger-bg); color: var(--danger); border-color: #E8BBBB; }
 
-  /* Warning banner for edge case */
-  .edge-banner {
-    background: var(--warning-bg);
-    border: 1px solid var(--warning-border);
-    border-radius: 8px;
-    padding: 0.65rem 1rem;
-    margin-bottom: 2rem;
-    font-size: 0.78rem;
-    color: var(--warning);
-    line-height: 1.5;
+  /* Admin login panel */
+  .admin-login {
+    background: var(--admin-bg); border: 1px solid var(--admin-border);
+    border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1.25rem;
     display: none;
   }
+  .admin-login.visible { display: block; }
+  .admin-login-row { display: flex; gap: 0.75rem; align-items: flex-end; flex-wrap: wrap; }
+  .admin-login-label { font-size: 0.7rem; font-weight: 500; color: var(--admin); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.35rem; }
+  .admin-error { font-size: 0.72rem; color: var(--danger); margin-top: 0.5rem; font-style: italic; display: none; }
+  .admin-error.visible { display: block; }
 
+  /* Admin override panel */
+  .admin-panel {
+    background: var(--admin-bg); border: 1px solid var(--admin-border);
+    border-radius: 10px; padding: 1.25rem; margin-bottom: 1.25rem;
+    display: none;
+  }
+  .admin-panel.visible { display: block; }
+  .admin-panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  .admin-panel-title { font-size: 0.72rem; font-weight: 500; color: var(--admin); letter-spacing: 0.12em; text-transform: uppercase; }
+  .admin-panel-note { font-size: 0.7rem; color: var(--admin); opacity: 0.7; font-style: italic; }
+  .override-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
+  .override-field { display: flex; flex-direction: column; gap: 0.3rem; }
+  .override-field label { font-size: 0.68rem; font-weight: 500; color: var(--admin); letter-spacing: 0.08em; text-transform: uppercase; }
+  .override-field input { font-family: 'Jost', sans-serif; font-size: 0.85rem; color: var(--ink); background: #fff; border: 1px solid var(--admin-border); border-radius: 8px; padding: 6px 10px; outline: none; }
+  .override-field input:focus { border-color: var(--admin); }
+  .override-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .override-active-banner {
+    background: var(--admin-bg); border: 1px solid var(--admin-border);
+    border-radius: 8px; padding: 0.6rem 1rem; margin-bottom: 1.25rem;
+    font-size: 0.75rem; color: var(--admin); display: none;
+    align-items: center; justify-content: space-between; gap: 1rem;
+  }
+  .override-active-banner.visible { display: flex; }
+
+  .edge-banner { background: var(--warning-bg); border: 1px solid var(--warning-border); border-radius: 8px; padding: 0.65rem 1rem; margin-bottom: 1.25rem; font-size: 0.78rem; color: var(--warning); line-height: 1.5; display: none; }
   .edge-banner.visible { display: block; }
-
   .edge-banner strong { font-weight: 500; }
 
-  /* Week cards */
   .weeks { display: flex; flex-direction: column; gap: 1.25rem; }
+  .week-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .week-card.current { border-color: var(--gold); box-shadow: 0 2px 16px rgba(184,150,90,0.12); }
+  .week-card.overridden { border-color: var(--admin); box-shadow: 0 2px 16px rgba(26,58,92,0.1); }
 
-  .week-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-  }
-
-  .week-card.current {
-    border-color: var(--gold);
-    box-shadow: 0 2px 16px rgba(184,150,90,0.12);
-  }
-
-  .week-header {
-    padding: 0.85rem 1.25rem;
-    border-bottom: 1px solid var(--border);
-    background: #FDFBF7;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
+  .week-header { padding: 0.85rem 1.25rem; border-bottom: 1px solid var(--border); background: #FDFBF7; display: flex; align-items: center; justify-content: space-between; }
   .week-card.current .week-header { background: var(--gold-pale); }
+  .week-card.overridden .week-header { background: var(--admin-bg); }
 
-  .week-date {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.05rem;
-    font-weight: 500;
-    color: var(--deep);
-  }
+  .week-date { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 500; color: var(--deep); }
+  .current-badge { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); background: rgba(184,150,90,0.1); border: 1px solid rgba(184,150,90,0.3); padding: 3px 10px; border-radius: 20px; }
+  .lookup-badge { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: #F5F2EC; border: 1px solid var(--border); padding: 3px 10px; border-radius: 20px; }
+  .override-badge { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--admin); background: var(--admin-bg); border: 1px solid var(--admin-border); padding: 3px 10px; border-radius: 20px; }
 
-  .current-badge {
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--gold);
-    background: rgba(184,150,90,0.1);
-    border: 1px solid rgba(184,150,90,0.3);
-    padding: 3px 10px;
-    border-radius: 20px;
-  }
-
-  .lookup-badge {
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    background: #F5F2EC;
-    border: 1px solid var(--border);
-    padding: 3px 10px;
-    border-radius: 20px;
-  }
-
-  .liturgies {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .liturgy {
-    padding: 1.1rem 1.25rem;
-    border-right: 1px solid var(--border);
-  }
-
+  .liturgies { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .liturgy { padding: 1.1rem 1.25rem; border-right: 1px solid var(--border); }
   .liturgy:last-child { border-right: none; }
-
-  .liturgy-title {
-    font-size: 0.65rem;
-    font-weight: 500;
-    color: var(--gold);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    margin-bottom: 0.6rem;
-  }
-
-  .priest-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--deep);
-    line-height: 1.3;
-  }
-
-  .priest-name.tbd { color: var(--danger); font-style: italic; }
+  .liturgy-title { font-size: 0.65rem; font-weight: 500; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.6rem; }
+  .priest-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; color: var(--deep); line-height: 1.3; }
   .priest-name.visitor { color: var(--muted); font-style: italic; }
-
-  .role-label {
-    font-size: 0.7rem;
-    font-weight: 400;
-    color: var(--muted);
-    margin-top: 1px;
-    letter-spacing: 0.04em;
-  }
-
+  .role-label { font-size: 0.7rem; font-weight: 400; color: var(--muted); margin-top: 1px; letter-spacing: 0.04em; }
   .role-label.celebrant { color: var(--success); }
-
-  .tbd-note {
-    font-size: 0.65rem;
-    color: var(--danger);
-    margin-top: 4px;
-    line-height: 1.4;
-    font-style: italic;
-  }
-
   .third-pair { display: flex; flex-direction: column; gap: 0.7rem; }
   .third-pair .divider { height: 1px; background: var(--border); }
+  .viewing-label { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.75rem; font-style: italic; text-align: center; }
 
-  .viewing-label {
-    font-size: 0.72rem;
-    color: var(--muted);
-    margin-bottom: 0.75rem;
-    font-style: italic;
-    text-align: center;
-  }
+  /* Admin trigger - subtle, bottom corner */
+  .admin-trigger { position: fixed; bottom: 1.5rem; right: 1.5rem; font-size: 0.7rem; color: var(--border); background: none; border: none; cursor: pointer; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .admin-trigger:hover { color: var(--muted); }
 
   @media (max-width: 560px) {
     .liturgies { grid-template-columns: 1fr; }
@@ -363,6 +149,7 @@
     .liturgy:last-child { border-bottom: none; }
     .church-name { font-size: 1.7rem; }
     .controls { flex-direction: column; align-items: stretch; }
+    .override-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -390,7 +177,57 @@
     <button class="btn" onclick="resetToToday()">Back to today</button>
   </div>
 
-  <!-- Absent toggles (only shown in today mode) -->
+  <!-- Admin login panel (hidden until trigger clicked) -->
+  <div class="admin-login" id="admin-login">
+    <div class="admin-login-label">Admin access</div>
+    <div class="admin-login-row">
+      <div class="control-group">
+        <input type="password" id="admin-pw" placeholder="Enter PIN" onkeydown="if(event.key==='Enter') verifyAdmin()">
+      </div>
+      <button class="btn admin-btn" onclick="verifyAdmin()">Unlock</button>
+      <button class="btn" onclick="closeAdminLogin()">Cancel</button>
+    </div>
+    <div class="admin-error" id="admin-error">Incorrect PIN - try again</div>
+  </div>
+
+  <!-- Override active banner -->
+  <div class="override-active-banner" id="override-banner">
+    <span>&#9632; Manual override is active for this Sunday</span>
+    <button class="btn danger-btn" onclick="clearOverride()">Clear override</button>
+  </div>
+
+  <!-- Admin override panel (shown after login) -->
+  <div class="admin-panel" id="admin-panel">
+    <div class="admin-panel-header">
+      <div class="admin-panel-title">&#9632; Manual override - this Sunday</div>
+      <div class="admin-panel-note">Absence toggles disabled while override is active</div>
+    </div>
+    <div class="override-grid">
+      <div class="override-field">
+        <label>1st Liturgy - Celebrant</label>
+        <input type="text" id="ov-first" placeholder="e.g. Fr. Abraam">
+      </div>
+      <div class="override-field">
+        <label>2nd Liturgy - Celebrant</label>
+        <input type="text" id="ov-second" placeholder="e.g. Fr. Abraham">
+      </div>
+      <div class="override-field">
+        <label>3rd Liturgy - Celebrant</label>
+        <input type="text" id="ov-thirdc" placeholder="e.g. Fr. Mina">
+      </div>
+      <div class="override-field">
+        <label>3rd Liturgy - Assistant</label>
+        <input type="text" id="ov-thirda" placeholder="e.g. Fr. Anastasi">
+      </div>
+    </div>
+    <div class="override-actions">
+      <button class="btn admin-btn" onclick="applyOverride()">Apply override</button>
+      <button class="btn danger-btn" onclick="clearOverride()">Clear override</button>
+      <button class="btn" onclick="lockAdmin()">Lock</button>
+    </div>
+  </div>
+
+  <!-- Absent section -->
   <div class="absent-section" id="absent-section">
     <div class="absent-section-header">
       <div class="absent-label">Mark as absent this Sunday</div>
@@ -399,7 +236,7 @@
     <div class="absent-buttons" id="absent-buttons"></div>
   </div>
 
-  <!-- Edge case warning banner -->
+  <!-- Edge case warning -->
   <div class="edge-banner" id="edge-banner"></div>
 
   <div id="viewing-label"></div>
@@ -407,10 +244,12 @@
 
 </div>
 
+<!-- Subtle admin trigger bottom right -->
+<button class="admin-trigger" id="admin-trigger" onclick="showAdminLogin()">admin</button>
+
 <script>
   const PRIESTS = ['Fr. Abraam', 'Fr. Abraham', 'Fr. Mina', 'Fr. Anastasi'];
 
-  // 4-week rotation: each entry = { first, second, thirdC, thirdA } as indices into PRIESTS
   const CYCLE = [
     { first: 0, second: 1, thirdC: 2, thirdA: 3 },
     { first: 1, second: 2, thirdC: 3, thirdA: 0 },
@@ -418,11 +257,87 @@
     { first: 3, second: 0, thirdC: 1, thirdA: 2 },
   ];
 
-  // Anchor: Feb 1 2025 = Week A (cycle index 0)
   const ANCHOR = new Date(2025, 1, 1);
+  const HASH = 'b616a530ed23eed5da7b3ec2864d174ca84d47b3c5b251cf11fb5e226dfc187e';
 
   let absentSet = new Set();
-  let lookupMode = false; // false = rolling 3-week from today, true = single date lookup
+  let lookupMode = false;
+  let adminUnlocked = false;
+  let override = null; // { first, second, thirdC, thirdA } as strings, or null
+
+  // SHA-256 using SubtleCrypto (built into all modern browsers)
+  async function sha256(message) {
+    const msgBuffer = new TextEncoder().encode(message);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  async function verifyAdmin() {
+    const input = document.getElementById('admin-pw').value;
+    const hashed = await sha256(input);
+    if (hashed === HASH) {
+      adminUnlocked = true;
+      document.getElementById('admin-login').classList.remove('visible');
+      document.getElementById('admin-pw').value = '';
+      document.getElementById('admin-error').classList.remove('visible');
+      document.getElementById('admin-panel').classList.add('visible');
+      document.getElementById('admin-trigger').style.display = 'none';
+      // Pre-fill fields with current predicted values
+      const sundays = getSundays();
+      const ci = getCycleIndex(sundays[0]);
+      const slot = CYCLE[ci];
+      document.getElementById('ov-first').value = override ? override.first : PRIESTS[slot.first];
+      document.getElementById('ov-second').value = override ? override.second : PRIESTS[slot.second];
+      document.getElementById('ov-thirdc').value = override ? override.thirdC : PRIESTS[slot.thirdC];
+      document.getElementById('ov-thirda').value = override ? override.thirdA : PRIESTS[slot.thirdA];
+    } else {
+      document.getElementById('admin-error').classList.add('visible');
+    }
+  }
+
+  function showAdminLogin() {
+    document.getElementById('admin-login').classList.add('visible');
+    document.getElementById('admin-pw').focus();
+  }
+
+  function closeAdminLogin() {
+    document.getElementById('admin-login').classList.remove('visible');
+    document.getElementById('admin-pw').value = '';
+    document.getElementById('admin-error').classList.remove('visible');
+  }
+
+  function lockAdmin() {
+    adminUnlocked = false;
+    document.getElementById('admin-panel').classList.remove('visible');
+    document.getElementById('admin-trigger').style.display = 'block';
+  }
+
+  function applyOverride() {
+    const first = document.getElementById('ov-first').value.trim();
+    const second = document.getElementById('ov-second').value.trim();
+    const thirdC = document.getElementById('ov-thirdc').value.trim();
+    const thirdA = document.getElementById('ov-thirda').value.trim();
+    if (!first || !second || !thirdC || !thirdA) {
+      alert('Please fill in all four fields.');
+      return;
+    }
+    override = { first, second, thirdC, thirdA };
+    absentSet.clear();
+    document.getElementById('admin-panel').classList.remove('visible');
+    document.getElementById('admin-trigger').style.display = 'block';
+    adminUnlocked = false;
+    render();
+  }
+
+  function clearOverride() {
+    override = null;
+    document.getElementById('admin-panel').classList.remove('visible');
+    document.getElementById('override-banner').classList.remove('visible');
+    document.getElementById('admin-trigger').style.display = 'block';
+    adminUnlocked = false;
+    render();
+  }
 
   function getNextSunday(from) {
     const d = new Date(from);
@@ -455,86 +370,74 @@
     });
   }
 
-  // Apply edge case logic for the first (current) Sunday
-  // Returns a modified slot object based on who is absent
   function applyEdgeCases(slot) {
     if (absentSet.size === 0) return { slot, edgeMsg: null };
-
-    const absent = [...absentSet][0]; // handle one absence at a time for now
+    const absent = [...absentSet][0];
     let s = { ...slot };
     let edgeMsg = null;
-
-    // Determine the absent priest's role
-    const role =
-      s.first === absent ? 'first' :
-      s.second === absent ? 'second' :
-      s.thirdC === absent ? 'thirdC' :
-      s.thirdA === absent ? 'thirdA' : null;
-
+    const role = s.first === absent ? 'first' : s.second === absent ? 'second' : s.thirdC === absent ? 'thirdC' : s.thirdA === absent ? 'thirdA' : null;
     if (!role) return { slot: s, edgeMsg: null };
 
     if (role === 'thirdA') {
-      // Simplest case: assistant slot gets a visitor, no reshuffling
       s.thirdA = 'visitor';
-      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent. As 3rd Assistant, their slot is covered by a visiting priest — no reshuffling needed. <em>Confirm with clergy.</em>`;
+      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent as 3rd Assistant - a visiting priest fills that slot, no reshuffling needed. <em>Confirm with clergy.</em>`;
+    } else if (role === 'thirdC') {
+      s.thirdC = s.thirdA; s.thirdA = 'visitor';
+      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent as 3rd Celebrant - the Assistant steps up to celebrate, visiting priest assists. <em>Confirm with clergy.</em>`;
+    } else if (role === 'second') {
+      s.second = s.thirdC; s.thirdC = s.thirdA; s.thirdA = 'visitor';
+      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent as 2nd Liturgy - 3rd Celebrant covers 2nd, 3rd Assistant steps up to celebrate, visiting priest assists. <em>Confirm with clergy.</em>`;
+    } else if (role === 'first') {
+      s.first = s.second; s.second = s.thirdC; s.thirdC = s.thirdA; s.thirdA = 'visitor';
+      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent as 1st Liturgy - everyone shifts up one position, visiting priest assists at 3rd. <em>Confirm with clergy.</em>`;
     }
-
-    else if (role === 'thirdC') {
-      // 3rd Celebrant is out: assistant steps up, visitor fills assistant
-      s.thirdC = s.thirdA;
-      s.thirdA = 'visitor';
-      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent as 3rd Celebrant. The 3rd Assistant steps up to celebrate, and a visiting priest assists. <em>Confirm with clergy.</em>`;
-    }
-
-    else if (role === 'second') {
-      // 2nd is out: 3rd Celebrant moves to 2nd, 3rd Assistant steps up to celebrate, visitor assists
-      s.second = s.thirdC;
-      s.thirdC = s.thirdA;
-      s.thirdA = 'visitor';
-      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent as 2nd Liturgy celebrant. The rotation shifts down: 3rd Celebrant covers 2nd, 3rd Assistant steps up to celebrate, visiting priest assists. <em>Confirm with clergy.</em>`;
-    }
-
-    else if (role === 'first') {
-      // 1st is out: everyone shifts up, visitor fills 3rd assistant
-      s.first = s.second;
-      s.second = s.thirdC;
-      s.thirdC = s.thirdA;
-      s.thirdA = 'visitor';
-      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent as 1st Liturgy celebrant. Everyone shifts up one position, and a visiting priest assists at the 3rd Liturgy. <em>Confirm with clergy.</em>`;
-    }
-
     return { slot: s, edgeMsg };
   }
 
-  function priestBlock(idx, role, applyAbsent) {
-    if (idx === 'visitor') {
-      return `<div class="priest-name visitor">Visiting Priest</div>
-              <div class="role-label">${role}</div>`;
-    }
+  function priestBlock(name, role) {
+    const isVisitor = name === 'visitor';
+    const displayName = isVisitor ? 'Visiting Priest' : name;
+    const nameClass = isVisitor ? 'priest-name visitor' : 'priest-name';
     const roleClass = role === 'Celebrant' ? 'role-label celebrant' : 'role-label';
-    return `<div class="priest-name">${PRIESTS[idx]}</div>
-            <div class="${roleClass}">${role}</div>`;
+    return `<div class="${nameClass}">${displayName}</div><div class="${roleClass}">${role}</div>`;
   }
 
   function renderCard(sunday, isCurrent, isLookup) {
     const ci = getCycleIndex(sunday);
     let slot = { ...CYCLE[ci] };
     let edgeMsg = null;
+    let isOverridden = false;
 
-    if (isCurrent && absentSet.size > 0) {
+    // Convert slot indices to names for rendering
+    let names = {
+      first: PRIESTS[slot.first],
+      second: PRIESTS[slot.second],
+      thirdC: PRIESTS[slot.thirdC],
+      thirdA: PRIESTS[slot.thirdA],
+    };
+
+    if (isCurrent && override) {
+      names = { ...override };
+      isOverridden = true;
+    } else if (isCurrent && absentSet.size > 0) {
       const result = applyEdgeCases(slot);
-      slot = result.slot;
+      const s = result.slot;
       edgeMsg = result.edgeMsg;
+      names = {
+        first: typeof s.first === 'number' ? PRIESTS[s.first] : s.first,
+        second: typeof s.second === 'number' ? PRIESTS[s.second] : s.second,
+        thirdC: typeof s.thirdC === 'number' ? PRIESTS[s.thirdC] : s.thirdC,
+        thirdA: typeof s.thirdA === 'number' ? PRIESTS[s.thirdA] : s.thirdA,
+      };
     }
 
-    const badge = isCurrent
-      ? '<div class="current-badge">This Sunday</div>'
-      : isLookup
-        ? '<div class="lookup-badge">Looked up</div>'
-        : '';
+    const cardClass = isOverridden ? 'week-card overridden' : isCurrent ? 'week-card current' : 'week-card';
+    const badge = isOverridden ? '<div class="override-badge">&#9632; Manually overridden</div>'
+      : isCurrent ? '<div class="current-badge">This Sunday</div>'
+      : isLookup ? '<div class="lookup-badge">Looked up</div>' : '';
 
     return { html: `
-      <div class="week-card ${isCurrent ? 'current' : ''}">
+      <div class="${cardClass}">
         <div class="week-header">
           <div class="week-date">${formatDate(sunday)}</div>
           ${badge}
@@ -542,23 +445,23 @@
         <div class="liturgies">
           <div class="liturgy">
             <div class="liturgy-title">1st Liturgy</div>
-            ${priestBlock(slot.first, 'Celebrant', isCurrent)}
+            ${priestBlock(names.first, 'Celebrant')}
           </div>
           <div class="liturgy">
             <div class="liturgy-title">2nd Liturgy</div>
-            ${priestBlock(slot.second, 'Celebrant', isCurrent)}
+            ${priestBlock(names.second, 'Celebrant')}
           </div>
           <div class="liturgy">
             <div class="liturgy-title">3rd Liturgy</div>
             <div class="third-pair">
-              <div>${priestBlock(slot.thirdC, 'Celebrant', isCurrent)}</div>
+              <div>${priestBlock(names.thirdC, 'Celebrant')}</div>
               <div class="divider"></div>
-              <div>${priestBlock(slot.thirdA, 'Assistant', isCurrent)}</div>
+              <div>${priestBlock(names.thirdA, 'Assistant')}</div>
             </div>
           </div>
         </div>
       </div>
-    `, edgeMsg };
+    `, edgeMsg, isOverridden };
   }
 
   function renderAbsentButtons() {
@@ -567,15 +470,9 @@
     PRIESTS.forEach((p, i) => {
       const btn = document.createElement('button');
       btn.className = 'priest-btn' + (absentSet.has(i) ? ' absent' : '');
-      btn.textContent = absentSet.has(i) ? p + ' — absent' : p;
+      btn.textContent = absentSet.has(i) ? p + ' - absent' : p;
       btn.onclick = () => {
-        // Only allow one absent at a time for now
-        if (absentSet.has(i)) {
-          absentSet.delete(i);
-        } else {
-          absentSet.clear();
-          absentSet.add(i);
-        }
+        if (absentSet.has(i)) { absentSet.delete(i); } else { absentSet.clear(); absentSet.add(i); }
         render();
       };
       container.appendChild(btn);
@@ -587,8 +484,7 @@
     if (!picker.value) return;
     const [y, m, d] = picker.value.split('-').map(Number);
     const picked = new Date(y, m - 1, d);
-    const sunday = getNextSunday(picked);
-    lookupMode = sunday;
+    lookupMode = getNextSunday(picked);
     render();
   }
 
@@ -601,9 +497,9 @@
 
   function render() {
     renderAbsentButtons();
-
     const absentSection = document.getElementById('absent-section');
     const banner = document.getElementById('edge-banner');
+    const overrideBanner = document.getElementById('override-banner');
     const viewingLabel = document.getElementById('viewing-label');
     const container = document.getElementById('weeks');
     container.innerHTML = '';
@@ -612,15 +508,16 @@
     viewingLabel.innerHTML = '';
 
     if (lookupMode) {
-      // Single date lookup mode
       absentSection.style.display = 'none';
-      const sunday = lookupMode;
+      overrideBanner.classList.remove('visible');
       viewingLabel.innerHTML = `<div class="viewing-label">Showing schedule for the Sunday of the selected week</div>`;
-      const { html } = renderCard(sunday, false, true);
+      const { html } = renderCard(lookupMode, false, true);
       container.innerHTML = html;
     } else {
-      // Rolling 3-week mode
-      absentSection.style.display = 'block';
+      // Hide absent section if override is active
+      absentSection.style.display = override ? 'none' : 'block';
+      overrideBanner.classList.toggle('visible', !!override);
+
       const sundays = getSundays();
       let edgeMsgToShow = null;
 
