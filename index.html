@@ -73,26 +73,16 @@
   .priest-btn:hover { border-color: var(--gold); color: var(--gold); }
   .priest-btn.absent { background: var(--danger-bg); color: var(--danger); border-color: #E8BBBB; }
 
-  /* Admin login panel */
-  .admin-login {
-    background: var(--admin-bg); border: 1px solid var(--admin-border);
-    border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1.25rem;
-    display: none;
-  }
+  .admin-login { background: var(--admin-bg); border: 1px solid var(--admin-border); border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; display: none; }
   .admin-login.visible { display: block; }
   .admin-login-row { display: flex; gap: 0.75rem; align-items: flex-end; flex-wrap: wrap; }
   .admin-login-label { font-size: 0.7rem; font-weight: 500; color: var(--admin); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.35rem; }
   .admin-error { font-size: 0.72rem; color: var(--danger); margin-top: 0.5rem; font-style: italic; display: none; }
   .admin-error.visible { display: block; }
 
-  /* Admin override panel */
-  .admin-panel {
-    background: var(--admin-bg); border: 1px solid var(--admin-border);
-    border-radius: 10px; padding: 1.25rem; margin-bottom: 1.25rem;
-    display: none;
-  }
+  .admin-panel { background: var(--admin-bg); border: 1px solid var(--admin-border); border-radius: 10px; padding: 1.25rem; margin-bottom: 1.25rem; display: none; }
   .admin-panel.visible { display: block; }
-  .admin-panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  .admin-panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
   .admin-panel-title { font-size: 0.72rem; font-weight: 500; color: var(--admin); letter-spacing: 0.12em; text-transform: uppercase; }
   .admin-panel-note { font-size: 0.7rem; color: var(--admin); opacity: 0.7; font-style: italic; }
   .override-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
@@ -101,17 +91,15 @@
   .override-field input { font-family: 'Jost', sans-serif; font-size: 0.85rem; color: var(--ink); background: #fff; border: 1px solid var(--admin-border); border-radius: 8px; padding: 6px 10px; outline: none; }
   .override-field input:focus { border-color: var(--admin); }
   .override-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-  .override-active-banner {
-    background: var(--admin-bg); border: 1px solid var(--admin-border);
-    border-radius: 8px; padding: 0.6rem 1rem; margin-bottom: 1.25rem;
-    font-size: 0.75rem; color: var(--admin); display: none;
-    align-items: center; justify-content: space-between; gap: 1rem;
-  }
+
+  .override-active-banner { background: var(--admin-bg); border: 1px solid var(--admin-border); border-radius: 8px; padding: 0.6rem 1rem; margin-bottom: 1.25rem; font-size: 0.75rem; color: var(--admin); display: none; align-items: center; justify-content: space-between; gap: 1rem; }
   .override-active-banner.visible { display: flex; }
 
   .edge-banner { background: var(--warning-bg); border: 1px solid var(--warning-border); border-radius: 8px; padding: 0.65rem 1rem; margin-bottom: 1.25rem; font-size: 0.78rem; color: var(--warning); line-height: 1.5; display: none; }
   .edge-banner.visible { display: block; }
   .edge-banner strong { font-weight: 500; }
+
+  .status-bar { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.75rem; font-style: italic; text-align: center; min-height: 1.2em; }
 
   .weeks { display: flex; flex-direction: column; gap: 1.25rem; }
   .week-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
@@ -137,11 +125,12 @@
   .role-label.celebrant { color: var(--success); }
   .third-pair { display: flex; flex-direction: column; gap: 0.7rem; }
   .third-pair .divider { height: 1px; background: var(--border); }
-  .viewing-label { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.75rem; font-style: italic; text-align: center; }
 
-  /* Admin trigger - subtle, bottom corner */
   .admin-trigger { position: fixed; bottom: 1.5rem; right: 1.5rem; font-size: 0.7rem; color: var(--border); background: none; border: none; cursor: pointer; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
   .admin-trigger:hover { color: var(--muted); }
+
+  .spinner { display: inline-block; width: 12px; height: 12px; border: 2px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.7s linear infinite; margin-right: 6px; vertical-align: middle; }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
   @media (max-width: 560px) {
     .liturgies { grid-template-columns: 1fr; }
@@ -167,7 +156,6 @@
     </div>
   </div>
 
-  <!-- Date controls -->
   <div class="controls">
     <div class="control-group">
       <div class="control-label">Jump to date</div>
@@ -177,7 +165,6 @@
     <button class="btn" onclick="resetToToday()">Back to today</button>
   </div>
 
-  <!-- Admin login panel (hidden until trigger clicked) -->
   <div class="admin-login" id="admin-login">
     <div class="admin-login-label">Admin access</div>
     <div class="admin-login-row">
@@ -190,13 +177,11 @@
     <div class="admin-error" id="admin-error">Incorrect PIN - try again</div>
   </div>
 
-  <!-- Override active banner -->
   <div class="override-active-banner" id="override-banner">
     <span>&#9632; Manual override is active for this Sunday</span>
     <button class="btn danger-btn" onclick="clearOverride()">Clear override</button>
   </div>
 
-  <!-- Admin override panel (shown after login) -->
   <div class="admin-panel" id="admin-panel">
     <div class="admin-panel-header">
       <div class="admin-panel-title">&#9632; Manual override - this Sunday</div>
@@ -227,7 +212,6 @@
     </div>
   </div>
 
-  <!-- Absent section -->
   <div class="absent-section" id="absent-section">
     <div class="absent-section-header">
       <div class="absent-label">Mark as absent this Sunday</div>
@@ -236,115 +220,97 @@
     <div class="absent-buttons" id="absent-buttons"></div>
   </div>
 
-  <!-- Edge case warning -->
   <div class="edge-banner" id="edge-banner"></div>
-
-  <div id="viewing-label"></div>
+  <div class="status-bar" id="status-bar"></div>
   <div class="weeks" id="weeks"></div>
 
 </div>
 
-<!-- Subtle admin trigger bottom right -->
 <button class="admin-trigger" id="admin-trigger" onclick="showAdminLogin()">admin</button>
 
 <script>
-  const PRIESTS = ['Fr. Abraam', 'Fr. Abraham', 'Fr. Mina', 'Fr. Anastasi'];
+  const SUPABASE_URL = 'https://heumyysjddepslkwnidz.supabase.co';
+  const SUPABASE_ANON = 'sb_publishable_ZZukcGMRB_mRvRR25zonGQ_71slbcml';
+  const HASH = 'b616a530ed23eed5da7b3ec2864d174ca84d47b3c5b251cf11fb5e226dfc187e';
 
+  const PRIESTS = ['Fr. Abraam', 'Fr. Abraham', 'Fr. Mina', 'Fr. Anastasi'];
   const CYCLE = [
     { first: 0, second: 1, thirdC: 2, thirdA: 3 },
     { first: 1, second: 2, thirdC: 3, thirdA: 0 },
     { first: 2, second: 3, thirdC: 0, thirdA: 1 },
     { first: 3, second: 0, thirdC: 1, thirdA: 2 },
   ];
-
   const ANCHOR = new Date(2025, 1, 1);
-  const HASH = 'b616a530ed23eed5da7b3ec2864d174ca84d47b3c5b251cf11fb5e226dfc187e';
 
   let absentSet = new Set();
   let lookupMode = false;
   let adminUnlocked = false;
-  let override = null; // { first, second, thirdC, thirdA } as strings, or null
+  let override = null; // loaded from Supabase or set locally
 
-  // SHA-256 using SubtleCrypto (built into all modern browsers)
-  async function sha256(message) {
-    const msgBuffer = new TextEncoder().encode(message);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  // ── Supabase helpers ──────────────────────────────────────────
+
+  function supaHeaders() {
+    return {
+      'Content-Type': 'application/json',
+      'apikey': SUPABASE_ANON,
+      'Authorization': 'Bearer ' + SUPABASE_ANON,
+      'Prefer': 'return=representation'
+    };
   }
 
-  async function verifyAdmin() {
-    const input = document.getElementById('admin-pw').value;
-    const hashed = await sha256(input);
-    if (hashed === HASH) {
-      adminUnlocked = true;
-      document.getElementById('admin-login').classList.remove('visible');
-      document.getElementById('admin-pw').value = '';
-      document.getElementById('admin-error').classList.remove('visible');
-      document.getElementById('admin-panel').classList.add('visible');
-      document.getElementById('admin-trigger').style.display = 'none';
-      // Pre-fill fields with current predicted values
-      const sundays = getSundays();
-      const ci = getCycleIndex(sundays[0]);
-      const slot = CYCLE[ci];
-      document.getElementById('ov-first').value = override ? override.first : PRIESTS[slot.first];
-      document.getElementById('ov-second').value = override ? override.second : PRIESTS[slot.second];
-      document.getElementById('ov-thirdc').value = override ? override.thirdC : PRIESTS[slot.thirdC];
-      document.getElementById('ov-thirda').value = override ? override.thirdA : PRIESTS[slot.thirdA];
-    } else {
-      document.getElementById('admin-error').classList.add('visible');
-    }
+  function toISODate(d) {
+    return d.getFullYear() + '-' +
+      String(d.getMonth() + 1).padStart(2, '0') + '-' +
+      String(d.getDate()).padStart(2, '0');
   }
 
-  function showAdminLogin() {
-    document.getElementById('admin-login').classList.add('visible');
-    document.getElementById('admin-pw').focus();
+  async function fetchOverride(sundayDate) {
+    const iso = toISODate(sundayDate);
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/overrides?sunday_date=eq.${iso}&select=*`,
+      { headers: supaHeaders() }
+    );
+    const data = await res.json();
+    return data && data.length > 0 ? data[0] : null;
   }
 
-  function closeAdminLogin() {
-    document.getElementById('admin-login').classList.remove('visible');
-    document.getElementById('admin-pw').value = '';
-    document.getElementById('admin-error').classList.remove('visible');
+  async function saveOverride(sundayDate, values) {
+    const iso = toISODate(sundayDate);
+    const payload = {
+      sunday_date: iso,
+      first: values.first,
+      second: values.second,
+      third_celebrant: values.thirdC,
+      third_assistant: values.thirdA
+    };
+    // Upsert - insert or update if exists
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/overrides`,
+      {
+        method: 'POST',
+        headers: { ...supaHeaders(), 'Prefer': 'resolution=merge-duplicates,return=representation' },
+        body: JSON.stringify(payload)
+      }
+    );
+    return res.ok;
   }
 
-  function lockAdmin() {
-    adminUnlocked = false;
-    document.getElementById('admin-panel').classList.remove('visible');
-    document.getElementById('admin-trigger').style.display = 'block';
+  async function deleteOverride(sundayDate) {
+    const iso = toISODate(sundayDate);
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/overrides?sunday_date=eq.${iso}`,
+      { method: 'DELETE', headers: supaHeaders() }
+    );
+    return res.ok;
   }
 
-  function applyOverride() {
-    const first = document.getElementById('ov-first').value.trim();
-    const second = document.getElementById('ov-second').value.trim();
-    const thirdC = document.getElementById('ov-thirdc').value.trim();
-    const thirdA = document.getElementById('ov-thirda').value.trim();
-    if (!first || !second || !thirdC || !thirdA) {
-      alert('Please fill in all four fields.');
-      return;
-    }
-    override = { first, second, thirdC, thirdA };
-    absentSet.clear();
-    document.getElementById('admin-panel').classList.remove('visible');
-    document.getElementById('admin-trigger').style.display = 'block';
-    adminUnlocked = false;
-    render();
-  }
-
-  function clearOverride() {
-    override = null;
-    document.getElementById('admin-panel').classList.remove('visible');
-    document.getElementById('override-banner').classList.remove('visible');
-    document.getElementById('admin-trigger').style.display = 'block';
-    adminUnlocked = false;
-    render();
-  }
+  // ── Date helpers ─────────────────────────────────────────────
 
   function getNextSunday(from) {
     const d = new Date(from);
     d.setHours(0, 0, 0, 0);
     const day = d.getDay();
-    const diff = day === 0 ? 0 : 7 - day;
-    d.setDate(d.getDate() + diff);
+    d.setDate(d.getDate() + (day === 0 ? 0 : 7 - day));
     return d;
   }
 
@@ -370,28 +336,123 @@
     });
   }
 
+  // ── Edge case logic ───────────────────────────────────────────
+  // Rule: 3rd Assistant covers whoever is missing. Visitor fills 3rd Assistant.
+
   function applyEdgeCases(slot) {
     if (absentSet.size === 0) return { slot, edgeMsg: null };
     const absent = [...absentSet][0];
     let s = { ...slot };
-    let edgeMsg = null;
-    const role = s.first === absent ? 'first' : s.second === absent ? 'second' : s.thirdC === absent ? 'thirdC' : s.thirdA === absent ? 'thirdA' : null;
+
+    const role =
+      s.first === absent ? 'first' :
+      s.second === absent ? 'second' :
+      s.thirdC === absent ? 'thirdC' :
+      s.thirdA === absent ? 'thirdA' : null;
+
     if (!role) return { slot: s, edgeMsg: null };
+
+    let edgeMsg = '';
 
     if (role === 'thirdA') {
       s.thirdA = 'visitor';
-      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent as 3rd Assistant - a visiting priest fills that slot, no reshuffling needed. <em>Confirm with clergy.</em>`;
-    } else if (role === 'thirdC') {
-      s.thirdC = s.thirdA; s.thirdA = 'visitor';
-      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent as 3rd Celebrant - the Assistant steps up to celebrate, visiting priest assists. <em>Confirm with clergy.</em>`;
-    } else if (role === 'second') {
-      s.second = s.thirdC; s.thirdC = s.thirdA; s.thirdA = 'visitor';
-      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent as 2nd Liturgy - 3rd Celebrant covers 2nd, 3rd Assistant steps up to celebrate, visiting priest assists. <em>Confirm with clergy.</em>`;
-    } else if (role === 'first') {
-      s.first = s.second; s.second = s.thirdC; s.thirdC = s.thirdA; s.thirdA = 'visitor';
-      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent as 1st Liturgy - everyone shifts up one position, visiting priest assists at 3rd. <em>Confirm with clergy.</em>`;
+      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent as 3rd Assistant - a visiting priest fills that slot. <em>Confirm with clergy.</em>`;
+    } else {
+      // 3rd assistant covers the missing role
+      const coveringPriest = PRIESTS[s.thirdA];
+      if (role === 'first') s.first = s.thirdA;
+      else if (role === 'second') s.second = s.thirdA;
+      else if (role === 'thirdC') s.thirdC = s.thirdA;
+      s.thirdA = 'visitor';
+      edgeMsg = `<strong>${PRIESTS[absent]}</strong> is absent - <strong>${coveringPriest}</strong> covers their role, visiting priest assists at 3rd. <em>Confirm with clergy.</em>`;
     }
+
     return { slot: s, edgeMsg };
+  }
+
+  // ── Auth ──────────────────────────────────────────────────────
+
+  async function sha256(message) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(message));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  async function verifyAdmin() {
+    const input = document.getElementById('admin-pw').value;
+    const hashed = await sha256(input);
+    if (hashed === HASH) {
+      adminUnlocked = true;
+      document.getElementById('admin-login').classList.remove('visible');
+      document.getElementById('admin-pw').value = '';
+      document.getElementById('admin-error').classList.remove('visible');
+      document.getElementById('admin-panel').classList.add('visible');
+      document.getElementById('admin-trigger').style.display = 'none';
+      // Pre-fill fields
+      const sundays = getSundays();
+      const ci = getCycleIndex(sundays[0]);
+      const slot = CYCLE[ci];
+      document.getElementById('ov-first').value = override ? override.first : PRIESTS[slot.first];
+      document.getElementById('ov-second').value = override ? override.second : PRIESTS[slot.second];
+      document.getElementById('ov-thirdc').value = override ? override.thirdC : PRIESTS[slot.thirdC];
+      document.getElementById('ov-thirda').value = override ? override.thirdA : PRIESTS[slot.thirdA];
+    } else {
+      document.getElementById('admin-error').classList.add('visible');
+    }
+  }
+
+  function showAdminLogin() {
+    document.getElementById('admin-login').classList.add('visible');
+    setTimeout(() => document.getElementById('admin-pw').focus(), 50);
+  }
+
+  function closeAdminLogin() {
+    document.getElementById('admin-login').classList.remove('visible');
+    document.getElementById('admin-pw').value = '';
+    document.getElementById('admin-error').classList.remove('visible');
+  }
+
+  function lockAdmin() {
+    adminUnlocked = false;
+    document.getElementById('admin-panel').classList.remove('visible');
+    document.getElementById('admin-trigger').style.display = 'block';
+  }
+
+  async function applyOverride() {
+    const first = document.getElementById('ov-first').value.trim();
+    const second = document.getElementById('ov-second').value.trim();
+    const thirdC = document.getElementById('ov-thirdc').value.trim();
+    const thirdA = document.getElementById('ov-thirda').value.trim();
+    if (!first || !second || !thirdC || !thirdA) { alert('Please fill in all four fields.'); return; }
+
+    setStatus('<span class="spinner"></span> Saving override...');
+    const sunday = getSundays()[0];
+    const ok = await saveOverride(sunday, { first, second, thirdC, thirdA });
+    if (ok) {
+      override = { first, second, thirdC, thirdA };
+      absentSet.clear();
+      lockAdmin();
+      setStatus('');
+      render();
+    } else {
+      setStatus('Failed to save - check your connection.');
+    }
+  }
+
+  async function clearOverride() {
+    setStatus('<span class="spinner"></span> Clearing override...');
+    const sunday = getSundays()[0];
+    await deleteOverride(sunday);
+    override = null;
+    lockAdmin();
+    document.getElementById('override-banner').classList.remove('visible');
+    setStatus('');
+    render();
+  }
+
+  // ── Rendering ─────────────────────────────────────────────────
+
+  function setStatus(msg) {
+    document.getElementById('status-bar').innerHTML = msg;
   }
 
   function priestBlock(name, role) {
@@ -404,23 +465,14 @@
 
   function renderCard(sunday, isCurrent, isLookup) {
     const ci = getCycleIndex(sunday);
-    let slot = { ...CYCLE[ci] };
-    let edgeMsg = null;
-    let isOverridden = false;
-
-    // Convert slot indices to names for rendering
-    let names = {
-      first: PRIESTS[slot.first],
-      second: PRIESTS[slot.second],
-      thirdC: PRIESTS[slot.thirdC],
-      thirdA: PRIESTS[slot.thirdA],
-    };
+    const baseSlot = { ...CYCLE[ci] };
+    let names, edgeMsg = null, isOverridden = false;
 
     if (isCurrent && override) {
-      names = { ...override };
+      names = { first: override.first, second: override.second, thirdC: override.thirdC, thirdA: override.thirdA };
       isOverridden = true;
     } else if (isCurrent && absentSet.size > 0) {
-      const result = applyEdgeCases(slot);
+      const result = applyEdgeCases(baseSlot);
       const s = result.slot;
       edgeMsg = result.edgeMsg;
       names = {
@@ -429,10 +481,18 @@
         thirdC: typeof s.thirdC === 'number' ? PRIESTS[s.thirdC] : s.thirdC,
         thirdA: typeof s.thirdA === 'number' ? PRIESTS[s.thirdA] : s.thirdA,
       };
+    } else {
+      names = {
+        first: PRIESTS[baseSlot.first],
+        second: PRIESTS[baseSlot.second],
+        thirdC: PRIESTS[baseSlot.thirdC],
+        thirdA: PRIESTS[baseSlot.thirdA],
+      };
     }
 
     const cardClass = isOverridden ? 'week-card overridden' : isCurrent ? 'week-card current' : 'week-card';
-    const badge = isOverridden ? '<div class="override-badge">&#9632; Manually overridden</div>'
+    const badge = isOverridden
+      ? '<div class="override-badge">&#9632; Manually overridden</div>'
       : isCurrent ? '<div class="current-badge">This Sunday</div>'
       : isLookup ? '<div class="lookup-badge">Looked up</div>' : '';
 
@@ -460,8 +520,7 @@
             </div>
           </div>
         </div>
-      </div>
-    `, edgeMsg, isOverridden };
+      </div>`, edgeMsg, isOverridden };
   }
 
   function renderAbsentButtons() {
@@ -472,7 +531,7 @@
       btn.className = 'priest-btn' + (absentSet.has(i) ? ' absent' : '');
       btn.textContent = absentSet.has(i) ? p + ' - absent' : p;
       btn.onclick = () => {
-        if (absentSet.has(i)) { absentSet.delete(i); } else { absentSet.clear(); absentSet.add(i); }
+        if (absentSet.has(i)) absentSet.delete(i); else { absentSet.clear(); absentSet.add(i); }
         render();
       };
       container.appendChild(btn);
@@ -483,8 +542,7 @@
     const picker = document.getElementById('date-picker');
     if (!picker.value) return;
     const [y, m, d] = picker.value.split('-').map(Number);
-    const picked = new Date(y, m - 1, d);
-    lookupMode = getNextSunday(picked);
+    lookupMode = getNextSunday(new Date(y, m - 1, d));
     render();
   }
 
@@ -500,42 +558,49 @@
     const absentSection = document.getElementById('absent-section');
     const banner = document.getElementById('edge-banner');
     const overrideBanner = document.getElementById('override-banner');
-    const viewingLabel = document.getElementById('viewing-label');
     const container = document.getElementById('weeks');
     container.innerHTML = '';
     banner.className = 'edge-banner';
     banner.innerHTML = '';
-    viewingLabel.innerHTML = '';
 
     if (lookupMode) {
       absentSection.style.display = 'none';
       overrideBanner.classList.remove('visible');
-      viewingLabel.innerHTML = `<div class="viewing-label">Showing schedule for the Sunday of the selected week</div>`;
       const { html } = renderCard(lookupMode, false, true);
       container.innerHTML = html;
     } else {
-      // Hide absent section if override is active
       absentSection.style.display = override ? 'none' : 'block';
       overrideBanner.classList.toggle('visible', !!override);
-
       const sundays = getSundays();
       let edgeMsgToShow = null;
-
       sundays.forEach((sunday, wi) => {
         const isCurrent = wi === 0;
         const { html, edgeMsg } = renderCard(sunday, isCurrent, false);
         if (isCurrent && edgeMsg) edgeMsgToShow = edgeMsg;
         container.innerHTML += html;
       });
-
-      if (edgeMsgToShow) {
-        banner.innerHTML = edgeMsgToShow;
-        banner.className = 'edge-banner visible';
-      }
+      if (edgeMsgToShow) { banner.innerHTML = edgeMsgToShow; banner.className = 'edge-banner visible'; }
     }
   }
 
-  render();
+  // ── Init: load override from Supabase ─────────────────────────
+
+  async function init() {
+    setStatus('<span class="spinner"></span> Loading schedule...');
+    try {
+      const sunday = getSundays()[0];
+      const row = await fetchOverride(sunday);
+      if (row) {
+        override = { first: row.first, second: row.second, thirdC: row.third_celebrant, thirdA: row.third_assistant };
+      }
+    } catch(e) {
+      console.warn('Could not load override:', e);
+    }
+    setStatus('');
+    render();
+  }
+
+  init();
 </script>
 </body>
 </html>
